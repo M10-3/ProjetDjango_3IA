@@ -40,8 +40,9 @@ class Reservation(models.Model) :
     def clean(self) :
         if self.conference.start_date < timezone.now().date(): 
             raise ValidationError('you can only reserve for upcomming conference')
-        reservation_count = Reservation.objects.filter(participant = self.participant, reservation_date = self.reservation_date)
-        if reservation_count>=3 :
+        today = timezone.now().date()
+        reservation_count = Reservation.objects.filter(participant = self.participant, reservation_date__date = today).count()
+        if reservation_count >= 3 :
             raise ValidationError('You can only have 3 reservations')
     class Meta :
         unique_together=('conference', 'participant')

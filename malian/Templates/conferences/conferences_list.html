@@ -1,0 +1,15 @@
+<h2>LIST OF CONFERENCES</h2>
+{%for c in conferences%}
+<fieldset>
+ <legend>{{c.title}}</legend>
+ <p>{{c.description}}</p>
+ <p>{{c.location}}</p>
+ <p>{{c.price}}</p>
+ <p>{{c.start_date}}</p>
+ <p>{{c.end_date}}</p>
+ <p>{{c.category}}</p>
+ <a href="{%url 'detailConf' c.id%}">Details</a>
+</fieldset>
+{%empty%}
+<p>THE LIST OF CONFERENCES IS EMPTY</p>
+{%endfor%}

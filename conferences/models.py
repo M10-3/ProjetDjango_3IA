@@ -8,8 +8,8 @@ from django.utils import timezone
 class Conferences (models.Model) : 
     title= models.CharField( max_length=255)
     description = models.TextField()
-    start_date=models.DateField(default=timezone.now().date())
-    end_date=models.DateField(default=timezone.now().date())
+    start_date=models.DateField(default=timezone.now)
+    end_date=models.DateField(default=timezone.now)
     location=models.CharField(max_length=255)
     price = models.FloatField(default=0.00 )
     capacity = models.IntegerField(validators=[MaxValueValidator(limit_value=900, message='capacity must be under 900')],  default=100)
@@ -18,9 +18,12 @@ class Conferences (models.Model) :
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     category=models.ForeignKey(Category, on_delete=models.CASCADE, related_name="conferences")
+    
+
     def clean(self):
         if self.end_date <= self.start_date: 
             raise ValidationError('End Date must be after start date')
+        
     class Meta :
         verbose_name_plural = "conferences"
         constraints = [
@@ -29,4 +32,7 @@ class Conferences (models.Model) :
                 name="The start date must be greater than today or equal"
             )
         ]
+    
+    def __str__(self):
+        return f"{self.title} - {self.start_date} & {self.location}"
 

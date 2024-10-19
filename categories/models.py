@@ -16,3 +16,7 @@ class Category (models.Model) :
     updated_at = models.DateTimeField(auto_now=True)
     class Meta :
         verbose_name_plural = "categories"
+
+    def __str__(self) :
+        return f" category title{self.title}"
+     

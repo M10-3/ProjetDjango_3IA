@@ -16,6 +16,16 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+#LA CONFIGURATION DE MON EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Remplace par ton serveur SMTP
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'gnine.diarra@esprit.tn'
+EMAIL_HOST_PASSWORD = 'fuupeumqyupsmbvd'
+DEFAULT_FROM_EMAIL = 'team@learnroom.com'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,7 +55,7 @@ ROOT_URLCONF = 'malian.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'malian/Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
